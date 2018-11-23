@@ -1,0 +1,19 @@
+11
+Cowsome - Honepy
+Bawnty - Cowsome
+Lacry - Bawnty
+Honepy - Maycorn
+Maycorn - Bawnty
+Mikliday - Cowsome
+Mausse - Lednec
+Maycorn - Mausse
+Bawnty - Mausse
+Mikliday - Maycorn
+Lednec - Maycorn
+6
+Cowsome - Mausse
+Lacry - Honepy
+Bawnty - Honepy
+Mikliday - Mausse
+Honepy - Lednec
+Mikliday - Lacry
