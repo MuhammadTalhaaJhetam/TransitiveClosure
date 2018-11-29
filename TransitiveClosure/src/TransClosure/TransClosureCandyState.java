@@ -3,6 +3,7 @@ package TransClosure;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -104,9 +105,11 @@ Scanner sc= null;
 					LinkedList<String> dests= directRoads.get(k);//all the connections from that state
 					
 					for(int j=0;j<dests.size();j++){
+						if(indices.containsKey(dests.get(j))){
 						int l=indices.get(dests.get(j));//gets the index of each connection
 						
 						arr[i][l]=1;//initializes the connections to 1
+						}
 					}
 				}
 				
@@ -131,42 +134,64 @@ Scanner sc= null;
 				
 				
 			
-				
+				if(sc.hasNextInt()){
 				//Read in the the pairs that need to be found
 				int numRoutes=sc.nextInt();
 				
-				int[]distances=new int[numRoutes];
-				
+				if(numRoutes!=0){
+				//int[]distances=new int[numRoutes];
+				ArrayList<Integer>distances=new ArrayList<Integer>();
+				//Arrays.fill(distances,10000000);
 				String startRoute="";
 				String endRoute="";
 				
 				for(int i=0;i<numRoutes;i++){
-					startRoute=sc.next();
-					sc.next();
-					endRoute=sc.next();
-					
-					//get the indices of the pairs
-				if(indices.containsKey(startRoute )){//check if the start state is one of the states
-					int a=indices.get(startRoute);
-					if(indices.containsKey(endRoute)){//check if the end state is one of the states
-						int b= indices.get(endRoute);
-						distances[i]=arr[a][b];
+					if(sc.hasNext()){
+						startRoute=sc.next();
+						sc.next();
+						endRoute=sc.next();
+						
+						//get the indices of the pairs
+						if(indices.containsKey(startRoute )){//check if the start state is one of the states
+							int a=indices.get(startRoute);
+							if(indices.containsKey(endRoute)){//check if the end state is one of the states
+								int b= indices.get(endRoute);
+								//distances[i]=arr[a][b];
+								distances.add(arr[a][b]);
+							}else{
+								System.out.println(endRoute + " was not a state listed and so there are no paths from " +startRoute +" to " +endRoute);
+								//distances[i]=10000000;
+								distances.add(10000000);
+							}	
+						}else{
+							System.out.println(startRoute + " was not a state listed and so there are no paths from " +startRoute);
+							//distances[i]=10000000;
+							distances.add(10000000);
+						}
 					}else{
-						distances[i]=10000000;
-					}	
-				}else{
-					distances[i]=10000000;
-				}
-				
+						//distances[i]=10000000;
+						break;
+					}
 				}//for
 				
 				
 				for(int d :distances){
-					System.out.print(d+" ");
+				
+						System.out.print(d+" ");
+				
+					
+				}
+				}else{
+					System.out.println("Number of direct routes is specified as 0");
 				}
 				
+				}
+				else{
+					System.out.println("Cannot calculate shortest path as there may be more or less direct roads between states");
+					System.out.println("Please ensure that the amount of specified direct roads is correct ");
+				}
 				}else{
-				System.out.println("Number of roads is 0");
+				System.out.println("Number of roads is 0 and so shortest path cannot be found if there are no direct roads between states");
 				}
 			}else{
 				System.out.println("File is empty");
