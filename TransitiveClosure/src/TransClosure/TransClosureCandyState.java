@@ -166,7 +166,7 @@ Scanner sc= null;
 				}
 				
 				}else{
-				System.out.println("Number of roads is road");
+				System.out.println("Number of roads is 0");
 				}
 			}else{
 				System.out.println("File is empty");
