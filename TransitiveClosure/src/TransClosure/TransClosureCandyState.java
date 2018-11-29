@@ -23,8 +23,10 @@ Scanner sc= null;
 			try {
 				sc= new Scanner(f);
 			
+			if(sc.hasNextLine()){
 			
 			int numRoads= sc.nextInt();
+			if(numRoads!=0){
 			String stateStart="";
 			
 			int[][] arr= new int[numRoads][numRoads];
@@ -128,6 +130,8 @@ Scanner sc= null;
 				}//end k loop
 				
 				
+			
+				
 				//Read in the the pairs that need to be found
 				int numRoutes=sc.nextInt();
 				
@@ -142,18 +146,31 @@ Scanner sc= null;
 					endRoute=sc.next();
 					
 					//get the indices of the pairs
+				if(indices.containsKey(startRoute )){//check if the start state is one of the states
 					int a=indices.get(startRoute);
-					int b= indices.get(endRoute);
-					
-					distances[i]=arr[a][b];
+					if(indices.containsKey(endRoute)){//check if the end state is one of the states
+						int b= indices.get(endRoute);
+						distances[i]=arr[a][b];
+					}else{
+						distances[i]=10000000;
+					}	
+				}else{
+					distances[i]=10000000;
 				}
+				
+				}//for
 				
 				
 				for(int d :distances){
 					System.out.print(d+" ");
 				}
 				
-			
+				}else{
+				System.out.println("Number of roads is road");
+				}
+			}else{
+				System.out.println("File is empty");
+			}
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
